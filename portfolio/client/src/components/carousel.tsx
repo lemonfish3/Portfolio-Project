@@ -1,53 +1,85 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import game1 from '../images/game1.png';
+import game2 from '../images/game2.png';
+import project1 from '../images/project1.png';
 
 const slides = [
   {
-    src: 'https://via.placeholder.com/800x400.png?text=First+Slide',
-    caption: 'First slide label',
-    text: 'Nulla vitae elit libero, a pharetra augue mollis interdum.',
+    src: game1,
+    caption: '',
+    text: '4/2025',
   },
   {
-    src: 'https://via.placeholder.com/800x400.png?text=Second+Slide',
-    caption: 'Second slide label',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    src: game2,
+    caption: '',
+    text: '10/2025',
   },
   {
-    src: 'https://via.placeholder.com/800x400.png?text=Third+Slide',
-    caption: 'Third slide label',
-    text: 'Praesent commodo cursus magna, vel scelerisque nisl consectetur.',
+    src: project1,
+    caption: '',
+    text: '2/2026',
   },
 ];
 
 function CarouselComponent() {
   const [index, setIndex] = useState(0);
-  const prev = () => setIndex((i) => (i - 1 + slides.length) % slides.length);
-  const next = () => setIndex((i) => (i + 1) % slides.length);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const prev = () =>
+    setIndex((i) => (i - 1 + slides.length) % slides.length);
+
+  const next = () =>
+    setIndex((i) => (i + 1) % slides.length);
+
+
+  useEffect(() => {
+    if (isHovered) return; // pause when hovered
+
+    const interval = setInterval(() => {
+      setIndex((i) => (i + 1) % slides.length);
+    }, 3000); // change slide every 3 seconds
+
+    return () => clearInterval(interval);
+  }, [isHovered]);
 
   return (
-    <div className="relative w-full max-w-3xl overflow-hidden">
-      <img
-        src={slides[index].src}
-        alt={slides[index].caption}
-        className="w-full h-auto object-cover"
-      />
-      <div className="absolute inset-0 flex flex-col justify-end p-4 bg-black bg-opacity-30 text-white">
-        <h3 className="text-xl font-semibold">{slides[index].caption}</h3>
+    <div
+      className="group relative w-80 max-w-full mx-auto overflow-hidden"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div className="w-full h-48 overflow-hidden bg-blue-100">
+        <img
+          src={slides[index].src}
+          alt={slides[index].caption}
+          className="w-full h-full object-cover transition-all duration-500"
+        />
+      </div>
+
+      <div className="absolute inset-0 flex flex-col justify-end p-4 bg-black/30 text-white items-stretch">
+        <h3 className="text-xl font-semibold">
+          {slides[index].caption}
+        </h3>
         <p className="text-sm">{slides[index].text}</p>
       </div>
+
       <button
         onClick={prev}
-        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 p-2 rounded-full"
+        className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full text-black bg-black/0 opacity-0 group-hover:opacity-100 group-hover:bg-black/40 transition focus:outline-none focus:ring-0"
       >
         ←
       </button>
+
       <button
         onClick={next}
-        className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 p-2 rounded-full"
+        className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full text-black bg-black/0 opacity-0 group-hover:opacity-100 group-hover:bg-black/40 transition focus:outline-none focus:ring-0"
       >
         →
       </button>
     </div>
   );
 }
+
+
 
 export default CarouselComponent;
