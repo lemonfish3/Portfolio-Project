@@ -1,16 +1,18 @@
-import Projects from "./projects.tsx"
-import About from "./about.tsx"
-import ImageAPI from "./image_api.tsx"
-
 
 function Home() {
     return(
         <div>
             <h1>My Portfolio</h1>
-            <Projects />
-            <About />
-            <ImageAPI />
-        </div>
+            <p>Welcome to my portfolio!</p>
+            <h2>Skills</h2>
+            <ul>
+                <li>JavaScript</li>
+                <li>React</li>
+                <li>Node.js</li>
+                <li>Python</li>
+            </ul>
+            <button onClick={() => alert('Button clicked!')}>Click Me</button>
+        </div>  
     )
 }
 

@@ -1,18 +1,25 @@
-import {Link } from 'react-router-dom'
+import Nav from 'react-bootstrap/Nav';
 
-function Nav({}) {
-    return (
-
-            <nav className="navbar">
-                <div className="navbar-logo">{}</div>
-                <ul className="navbar-links">
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/projects">Projects</Link></li>
-                    <li><Link to="/about">About</Link></li>
-                    <li><Link to="/image-api">Image API</Link></li>
-                </ul>
-            </nav>
-    )
+function Navbar() {
+  return (
+    <Nav defaultActiveKey="#home">
+      <Nav.Item>
+        <Nav.Link href="#home">Joy Yang</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="#about">About</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="#projects">Projects</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="#image_api">Image API</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="#contact">Contact</Nav.Link>
+      </Nav.Item>
+    </Nav>
+  );
 }
 
-export default Nav
+export default Navbar;
