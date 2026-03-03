@@ -9,7 +9,7 @@ const axios = require("axios");
 app.use(cors());
 app.use(express.json());
 
-//routes
+// routes
 const queries = [
   "dog",
   "sunset",
@@ -17,6 +17,8 @@ const queries = [
   "coffee",
   "ocean"
 ]
+
+const AI_PROMPT = "Write image caption for the following image:"
 
 // random picker
 function getRandomQuery() {
@@ -37,18 +39,63 @@ async function getImage(query) {
     return response.data.photos[0].src.large
 }
 
-// Sample endpoint to test the server
-app.get('/api/image/random', (req, res) => {
+// get image caption from openai
+async function getCaption(imageUrl) {
+    const response = await axios.post(
+        "https://api.openai.com/v1/chat/completions",
+        {
+            model: "gpt-4o-mini",
+            messages: [
+                {
+                    "role": "user",
+                    "content": [
+                    {
+                        "type": "text",
+                        "text": AI_PROMPT
+                    },
+                    {
+                        "type": "image_url",
+                        "image_url": {
+                        "url": imageUrl
+                        }
+                    }
+                    ]
+                }
+            ],
+            max_tokens: 50
+        },
+        {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
+            }
+        }
+    )
+
+    return response.data.choices[0].message.content
+}
+
+
+
+app.get('/api/image/random', async (req, res) => {
     try {
         const query = getRandomQuery()
-        const imageUrl = getImage(query)
+        // calling async to get image url
+        const imageUrl = await getImage(query)
+        console.log(`Fetched image for query: ${query}, URL: ${imageUrl}`)
+        // calling async to get caption
+        const caption = await getCaption(imageUrl)
+        console.log(`Fetched caption for image URL: ${imageUrl}, Caption: ${caption}`)
+
+        // console.log(`Fetched image for query: ${query}, URL: ${imageUrl}`)
 
         res.json({
             imageUrl,
-            caption: `Random query selected: ${query}`
-    })
+            caption
+        })
     } catch (error) {
-        res.status(500).json({ error: "Something went wrong"})
+        console.error("FULL ERROR:", error.response?.data || error.message)
+        res.status(500).json({ error: "Something went wrong" })
     }
 })
 
