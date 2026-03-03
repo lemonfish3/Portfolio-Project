@@ -1,19 +1,17 @@
+import CarouselComponent from '../components/carousel';
 
 function Home() {
-    return(
-        <div>
-            <h1>My Portfolio</h1>
-            <p>Welcome to my portfolio!</p>
-            <h2>Skills</h2>
-            <ul>
-                <li>JavaScript</li>
-                <li>React</li>
-                <li>Node.js</li>
-                <li>Python</li>
-            </ul>
-            <button onClick={() => alert('Button clicked!')}>Click Me</button>
-        </div>  
-    )
+    return (
+        <div className="flex flex-col items-center justify-center min-h-screen space-y-6">
+            <CarouselComponent />
+            <h1 className="text-3xl font-bold">Welcome to My Portfolio</h1>
+            <a href="#projects">
+                <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                    My Projects
+                </button>
+            </a>
+        </div>
+    );
 }
 
 export default Home
