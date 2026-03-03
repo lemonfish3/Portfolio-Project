@@ -6,7 +6,7 @@ import project1 from '../images/project1.png';
 
 function Projects() {
     return (
-        <div className="flex flex-wrap justify-center items-stretch gap-8 p-8 ">
+        <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-8 auto-rows-fr">
             <Card
                 title="Convalescence"
                 description="Convalescence is a 2D, action-RPG video game for PC developed in Unity. In this game,I led the game system design, defining and structuring the core gameplay mechanics to ensure a cohesive player experience. I implemented the character-switching system and designed the abilities and power-up mechanics to support strategic combat variety.               "
