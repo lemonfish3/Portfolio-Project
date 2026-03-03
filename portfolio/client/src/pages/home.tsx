@@ -11,7 +11,7 @@ function Home() {
                     Game Design and Software Engineering @UCI
                 </h2>
                 <a href="#projects">
-                    <button className="bg-blue-100 text-black px-4 py-2 rounded hover:bg-blue-200">
+                    <button className="bg-blue-100 text-black px-4 py-2 rounded hover:bg-blue-200 transform transition-transform duration-300 hover:-translate-y-1">
                         My Projects
                     </button>
                 </a>

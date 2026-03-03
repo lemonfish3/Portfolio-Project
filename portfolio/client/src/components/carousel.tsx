@@ -44,11 +44,11 @@ function CarouselComponent() {
 
   return (
     <div
-      className="group relative w-80 max-w-full mx-auto overflow-hidden"
+      className="group relative w-100 max-w-full mx-auto overflow-hidden"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="w-full h-48 overflow-hidden bg-blue-100">
+      <div className="w-full h-80 overflow-hidden bg-blue-100">
         <img
           src={slides[index].src}
           alt={slides[index].caption}
