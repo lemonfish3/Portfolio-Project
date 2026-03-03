@@ -75,7 +75,20 @@ async function getCaption(imageUrl) {
     return response.data.choices[0].message.content
 }
 
+app.post('/api/caption', async (req, res) => {
+  try {
+    const { imageUrl } = req.body;
+    if (!imageUrl) {
+      return res.status(400).json({ error: 'imageUrl is required' });
+    }
 
+    const caption = await getCaption(imageUrl); // your existing OpenAI function
+    res.json({ caption });
+  } catch (error) {
+    console.error("Caption error:", error.response?.data || error.message);
+    res.status(500).json({ error: 'Failed to generate caption' });
+  }
+});
 
 app.get('/api/image/random', async (req, res) => {
     try {
@@ -84,14 +97,14 @@ app.get('/api/image/random', async (req, res) => {
         const imageUrl = await getImage(query)
         console.log(`Fetched image for query: ${query}, URL: ${imageUrl}`)
         // calling async to get caption
-        const caption = await getCaption(imageUrl)
-        console.log(`Fetched caption for image URL: ${imageUrl}, Caption: ${caption}`)
+        // const caption = await getCaption(imageUrl)
+        //console.log(`Fetched caption for image URL: ${imageUrl}, Caption: ${caption}`)
 
         // console.log(`Fetched image for query: ${query}, URL: ${imageUrl}`)
 
         res.json({
             imageUrl,
-            caption
+            caption: null // or omit this line entirely
         })
     } catch (error) {
         console.error("FULL ERROR:", error.response?.data || error.message)
@@ -105,3 +118,32 @@ const Port = 5001;
 app.listen(Port, () => {
     console.log(`Server is running on port ${Port}`);
 });
+
+
+
+// gemini
+// const { GoogleGenerativeAI } = require("@google/generative-ai");
+
+
+// async function getCaption(imageUrl) {
+//     const ai = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+//     const model = ai.getGenerativeModel({ model: "gemini-3-flash-preview" });
+//     const response = await fetch(imageUrl);
+//     const imageArrayBuffer = await response.arrayBuffer();
+//     const base64ImageData = Buffer.from(imageArrayBuffer).toString('base64');
+
+//     const result = await model.generateContent({
+//         contents: [
+//         {
+//         inlineData: {
+//             mimeType: 'image/jpeg',
+//             data: base64ImageData,
+//         },
+//         },
+//         { text: "Caption this image." }
+//     ],
+//     });
+
+//     return result.response.text();
+// }
+
