@@ -6,7 +6,14 @@ const cors = require('cors');
 const app = express();
 const axios = require("axios");
 
-app.use(cors());
+const allowedOrigins = [
+    'http://localhost:3000', 
+    'https://joy-yang.netlify.app/' 
+];
+
+app.use(cors({
+    origin: allowedOrigins
+}));
 app.use(express.json());
 
 // routes
