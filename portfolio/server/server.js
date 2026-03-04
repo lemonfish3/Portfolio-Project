@@ -8,6 +8,7 @@ const axios = require("axios");
 
 const allowedOrigins = [
     'http://localhost:3000', 
+    'http://localhost:5173',
     'https://joy-yang.netlify.app',
     'https://joy-yang.netlify.app/#image_api'
 ];

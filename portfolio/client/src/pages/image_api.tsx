@@ -13,7 +13,7 @@ function ImageAPI() {
     setError('');
     setCaption(''); // clear previous caption when new image loads
     try {
-      const response = await fetch('http://localhost:5001/api/image/random');
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/image/random`);
       if (!response.ok) throw new Error('Failed to fetch image');
       const data = await response.json();
       setImageUrl(data.imageUrl);
@@ -33,7 +33,7 @@ function ImageAPI() {
     setLoadingCaption(true);
     setError('');
     try {
-      const response = await fetch('http://localhost:5001/api/caption', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/caption`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ imageUrl }),
