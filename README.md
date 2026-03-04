@@ -1,4 +1,4 @@
-#[Joy's Portfolio](https://joy-yang.netlify.app/)
+# [Joy's Portfolio](https://joy-yang.netlify.app/)
 
 ## Tech Stack
 
@@ -26,3 +26,4 @@
 ### Development Tools
 - **Git & GitHub** – Version control and repository hosting.
 - **npm** – Package manager for installing dependencies.
+
