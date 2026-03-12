@@ -1,8 +1,9 @@
 import { useState } from 'react';
 
 function ImageAPI() {
-  const [imageUrl, setImageUrl] = useState('');
-  const [caption, setCaption] = useState('');
+  // State variables -> store data when the UI is reloaded
+  const [imageUrl, setImageUrl] = useState(''); // save the image URL
+  const [caption, setCaption] = useState(''); // save image caption
   const [loadingImage, setLoadingImage] = useState(false);
   const [loadingCaption, setLoadingCaption] = useState(false);
   const [error, setError] = useState('');
@@ -13,10 +14,15 @@ function ImageAPI() {
     setError('');
     setCaption(''); // clear previous caption when new image loads
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/image/random`);
+      // import .env varible for API base URL, fallback to localhost if not set
+      const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'; // Adjust port
+      const response = await fetch(`${API_BASE_URL}/api/image/random`);
+
       if (!response.ok) throw new Error('Failed to fetch image');
+
       const data = await response.json();
       setImageUrl(data.imageUrl);
+      // setCaption(data.caption); 
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unknown error');
     } finally {
