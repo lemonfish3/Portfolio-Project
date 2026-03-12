@@ -40,7 +40,8 @@ function ImageAPI() {
     setLoadingCaption(true);
     setError('');
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/caption`, {
+      const API_BASE_URL = import.meta.env.VITE_API_URL;
+      const response = await fetch(`${API_BASE_URL}/api/caption`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ imageUrl }),
@@ -85,7 +86,7 @@ function ImageAPI() {
       {error && <p className="text-red-500">{error}</p>}
 
       {imageUrl && (
-        <div className="space-y-4">
+        <div className="space-y-4flex flex-col items-center">
           <img src={imageUrl} alt="Random" className="w-100 h-100 object-cover" />
           {caption && <p className="text-gray-700 italic">"{caption}"</p>}
         </div>

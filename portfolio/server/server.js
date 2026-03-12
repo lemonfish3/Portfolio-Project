@@ -1,10 +1,15 @@
 // imports
-require("dotenv").config()
+import dotenv from "dotenv";
+dotenv.config();
 
-const express = require('express');
-const cors = require('cors');
+import express from "express";
 const app = express();
-const axios = require("axios");
+
+import cors from "cors";
+
+import axios from "axios";
+
+import { GoogleGenAI } from "@google/genai";
 
 // allowed origins for CORS
 const allowedOrigins = [
@@ -28,14 +33,19 @@ app.use(express.json());
 
 // routes
 const queries = [
-  "dog",
+  "cat",
   "sunset",
   "mountain",
   "coffee",
-  "ocean"
+  "ocean",
+  "flower",
+  "city",
+  "dog",
+  "food",
+  "space"
 ]
 
-const AI_PROMPT = "Write image caption for the following image:"
+const AI_PROMPT = "Write a single sentence caption for the following image:"
 
 // random picker
 function getRandomQuery() {
@@ -93,30 +103,33 @@ async function getImage(query) {
 // }
 
 // gemini
-const { GoogleGenerativeAI } = require("@google/generative-ai");
 
+const ai = new GoogleGenAI(process.env.GEMINI_API_KEY);
 
 async function getCaption(imageUrl) {
-    const ai = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const model = ai.getGenerativeModel({ model: "gemini-3-flash-preview" });
-    const response = await fetch(imageUrl);
-    const imageArrayBuffer = await response.arrayBuffer();
-    const base64ImageData = Buffer.from(imageArrayBuffer).toString('base64');
+  const ai = new GoogleGenAI({});
 
-    const result = await model.generateContent({
-        contents: [
-        {
-        inlineData: {
-            mimeType: 'image/jpeg',
-            data: base64ImageData,
-        },
-        },
-        { text: "Caption this image." }
-    ],
-    });
 
-    return result.response.text();
+  const response = await fetch(imageUrl);
+  const imageArrayBuffer = await response.arrayBuffer();
+  const base64ImageData = Buffer.from(imageArrayBuffer).toString('base64');
+
+  const result = await ai.models.generateContent({
+    model: "gemini-3-flash-preview",
+    contents: [
+    {
+      inlineData: {
+        mimeType: 'image/jpeg',
+        data: base64ImageData,
+      },
+    },
+    { text: AI_PROMPT }
+  ],
+  });
+  console.log(result.text);
+  return result.text;
 }
+
 
 
 app.post('/api/caption', async (req, res) => {
@@ -126,9 +139,11 @@ app.post('/api/caption', async (req, res) => {
       return res.status(400).json({ error: 'imageUrl is required' });
     }
 
-    const caption = await getCaption(imageUrl); // your existing OpenAI function
+    // const caption = await getCaption(imageUrl); // your existing OpenAI function
+    const caption = await getCaption(imageUrl); // test Gemini function
     res.json({ caption });
   } catch (error) {
+    // Log the full error response for debugging
     console.error("Caption error:", error.response?.data || error.message);
     res.status(500).json({ error: 'Failed to generate caption' });
   }
