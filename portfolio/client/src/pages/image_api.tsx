@@ -15,7 +15,8 @@ function ImageAPI() {
     setCaption(''); // clear previous caption when new image loads
     try {
       // import .env varible for API base URL, fallback to localhost if not set
-      const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'; // Adjust port
+      console.log(import.meta.env.VITE_API_URL);
+      const API_BASE_URL = import.meta.env.VITE_API_URL; // Adjust port
       const response = await fetch(`${API_BASE_URL}/api/image/random`);
 
       if (!response.ok) throw new Error('Failed to fetch image');
