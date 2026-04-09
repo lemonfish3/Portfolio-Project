@@ -9,8 +9,8 @@ import project3 from '../images/project3.png';
 
 function Projects() {
     return (
-        <div className="min-h-screen bg-gray-100">
-            <h1 className="text-4xl font-bold mb-8">Game Projects</h1>
+        <div className="min-h-screen">
+            <h1 className="mt-8 pt-8 text-4xl font-bold mb-8">Game Projects</h1>
             <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-8 auto-rows-fr">
                 <Card
                     title="Convalescence"
@@ -33,7 +33,7 @@ function Projects() {
                     url="https://maryzhou7799.itch.io/the-brew-beneath"
                 />
             </div>
-            <h1 className="text-4xl font-bold mb-8">Web Projects</h1>
+            <h1 className="mt-6 text-4xl font-bold mb-8">Web Projects</h1>
             <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-8 auto-rows-fr">
                 <Card
                     title="Cloudy"
