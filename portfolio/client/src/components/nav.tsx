@@ -14,9 +14,9 @@ function Nav() {
             <a href="#projects" className="px-3 py-1 rounded-md text-gray-700 hover:text-white hover:bg-blue-200">
               Projects
             </a>
-            <a href="#image_api" className="px-3 py-1 rounded-md text-gray-700 hover:text-white hover:bg-blue-200">
+            {/* <a href="#image_api" className="px-3 py-1 rounded-md text-gray-700 hover:text-white hover:bg-blue-200">
               Image API
-            </a>
+            </a> */}
             {/* <a href="#contact" className="px-3 py-1 rounded-md text-gray-700 hover:text-white hover:bg-blue-200">
               Contact
             </a> */}

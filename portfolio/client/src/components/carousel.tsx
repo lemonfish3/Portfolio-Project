@@ -1,9 +1,27 @@
 import { useState, useEffect } from 'react';
 import game1 from '../images/game1.png';
 import game2 from '../images/game2.png';
+import game3 from '../images/game3.png';
 import project1 from '../images/project1.png';
+import project2 from '../images/project2.gif';
+import project3 from '../images/project3.png';
 
 const slides = [
+  {
+    src: project1,
+    caption: '',
+    text: '3/2026',
+  },
+  {
+    src: project2,
+    caption: '',
+    text: '10/2025',  
+  },
+  {
+    src: project3,
+    caption: '',
+    text: '11/2025',
+  },
   {
     src: game1,
     caption: '',
@@ -15,9 +33,9 @@ const slides = [
     text: '10/2025',
   },
   {
-    src: project1,
+    src: game3,
     caption: '',
-    text: '2/2026',
+    text: '3/2026',
   },
 ];
 

@@ -29,11 +29,11 @@ function App() {
         </div>
       </section>
 
-      <section id="image_api" className="min-h-screen w-full flex items-center justify-center">
+      {/* <section id="image_api" className="min-h-screen w-full flex items-center justify-center">
         <div className="max-w-7xl w-full px-5 py-10 flex flex-col items-center text-center gap-8">
           <ImageAPI />
         </div>
-      </section>
+      </section> */}
 
       {/* <section id="contact" className="min-h-screen w-full flex items-center justify-center">
         <div className="max-w-7xl w-full px-5 py-10 flex flex-col items-center text-center gap-8">
