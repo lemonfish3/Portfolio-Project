@@ -30,7 +30,7 @@ function Projects() {
                     title="The Brew Beneath"
                     description="This project is a 2D simulation game designed to provide an interactive coffee shop management experience. In this project, I implemented UI components and core gameplay systems using Unity and C#, focusing on user interaction, system integration, and iterative testing within a collaborative team environment."
                     imageUrl={game3}
-                    url="https://maryzhou7799.itch.io/the-brew-beneath"
+                    url="https://kyingie.itch.io/the-brew-beneath"
                 />
             </div>
             <h1 className="mt-6 text-4xl font-bold mb-8">Web Projects</h1>
