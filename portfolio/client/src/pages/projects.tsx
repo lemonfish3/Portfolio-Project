@@ -23,7 +23,7 @@ function Projects() {
                     title="Cave of Songs"
                     description="Cave of Songs is a rhythm game made in Unity. I designed and developed the rhythm gameplay scene, implementing the core interactive music mechanics and player timing systems. I also built a reusable music management system to handle audio transitions, synchronization, and scalable integration across different scenes."
                     imageUrl={game2}
-                    url="https://maryzhou7799.itch.io/the-brew-beneath"
+                    url="https://muuum.itch.io/cave-of-songs"
                 />
 
                 <Card
